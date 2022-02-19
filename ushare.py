@@ -104,12 +104,12 @@ def receive_():
     if request.method == "POST":
         if "file" not in request.files:
             return failed_send_template
-        file = request.files["file"]
-        if file.filename == "":
-            return failed_send_template
-        filename = secure_filename(file.filename)
-
-        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+        files = request.files.getlist("file")
+        for file in files:
+            if file.filename == "":
+                return failed_send_template
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
         return success_template
     return upload_template
 
@@ -138,7 +138,7 @@ upload_template = """
 <title>Send new File</title>
 <h1>Send new File</h1>
 <form class="full-height" method=post enctype=multipart/form-data>
-<div class ="half-height"><input class="full-height full-width" type=file name=file></div>
+<div class ="half-height"><input class="full-height full-width" type=file name=file multiple></div>
 <div class ="half-height"><input class="full-height full-width" type=submit value=Upload></div>
 </form>
 </body>
