@@ -1,22 +1,26 @@
 #!/usr/bin/env python
-import os
-import sys
-import socket
 import logging
+import os
+import socket
+import sys
+
+import eventlet
+from eventlet import wsgi
 
 try:
     import click
     import pyqrcode
-    from werkzeug.utils import secure_filename
+    from flask import Flask, request, send_from_directory
     from werkzeug.exceptions import NotFound
-    from flask import Flask, send_from_directory, request, flash, redirect
-except:
+    from werkzeug.utils import secure_filename
+except Exception:
     print("Missing dependencies, Try pip install pyqrcode flask")
     sys.exit(1)
 
 # disable logging output
 logging.getLogger("werkzeug").disabled = True
 os.environ["WERKZEUG_RUN_MAIN"] = "true"
+os.environ["WERKZEUG_SERVER_FD"] = "1"
 
 
 app = Flask(__name__)
@@ -79,8 +83,7 @@ def start_flask(command, port):
     qr = pyqrcode.create(url)
     click.echo(qr.terminal(quiet_zone=1))
     click.echo("Link: {}".format(url))
-    # app.run(host="0.0.0.0", port=port, debug=True)
-    app.run(host="0.0.0.0", port=port)
+    wsgi.server(eventlet.listen(("0.0.0.0", port)), app)
 
 
 @app.route("/")
@@ -91,9 +94,7 @@ def index():
 @app.route("/send")
 def send_():
     try:
-        return send_from_directory(
-            directory=gdirectory, filename=gfile, as_attachment=True
-        )
+        return send_from_directory(gdirectory, gfile, as_attachment=True)
     except NotFound:
         click.echo("File not found, may be wrong path or filename.")
         sys.exit(1)
