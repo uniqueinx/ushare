@@ -2,14 +2,6 @@
 
 A simple, elegant file sharing tool for local networks. Easily share files between devices with a web interface and QR code support.
 
-## Screenshots
-
-### Web Interface
-![uShare Web Interface](./screenshots/web.jpeg)
-
-### Terminal Usage
-![uShare Terminal Usage](./screenshots/terminal.png)
-
 ## Features
 
 - **Simple File Sharing**: Share files quickly on your local network
@@ -58,3 +50,12 @@ ushare.py send file.txt
 ```
 usharer.py receive -d ./Downloads
 ```
+
+
+## Screenshots
+
+### Web Interface
+![uShare Web Interface](./screenshots/web.jpeg)
+
+### Terminal Usage
+![uShare Terminal Usage](./screenshots/terminal.png)
