@@ -40,13 +40,17 @@ A simple, elegant file sharing tool for local networks. Easily share files betwe
 ## Usage
 
 ```
-ushare.py [OPTIONS] COMMAND [ARGS]...
+Usage: ushare.py [OPTIONS] COMMAND [ARGS]...
+
+  A simple tool to share files via browser in a local network
+
 Options:
   --help  Show this message and exit.
+
 Commands:
-  receive  Receive files
-  send     Serve shared file
-  ```
+  receive  Receive files from others on the network.
+  send     Share a file with others on the network.
+```
 Examples:
 ```
 ushare.py send file.txt
