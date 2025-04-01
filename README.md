@@ -5,10 +5,10 @@ A simple, elegant file sharing tool for local networks. Easily share files betwe
 ## Screenshots
 
 ### Web Interface
-![uShare Web Interface](placeholder-for-web-interface-screenshot.png)
+![uShare Web Interface](./screenshots/web.jpeg)
 
 ### Terminal Usage
-![uShare Terminal Usage](placeholder-for-terminal-usage-screenshot.png)
+![uShare Terminal Usage](./screenshots/terminal.png)
 
 ## Features
 
